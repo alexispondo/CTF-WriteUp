@@ -10,3 +10,20 @@ Votre mission, si vous l'acceptez, est cruciale : infiltrer le système d'inform
 Votre première tâche consite à bien analyser le site web de darkatt4ck et trouver le flag web
 
 ## #Q1 Trouvez le flag sur l'application WEB
+
+Comme dans tous défis de test d'intrusion la première étape consiste à faire le `scan` de tous les ports sur le serveur cible.
+
+```
+nmap -p- 10.10.10.10 -A
+```
+
+Nous constatons que 4 ports sont ouverts: `22, 80, 1337, 20221`.
+
+- Port 80: Il ne donne rien de vraiment interessant à part la page par defaut de Appache qui ne nous aidera pas
+- Port 22: Service SSH dont la version n'est pas particulièrement vulnérable
+- Port 20221: Service FTP dont la version n'est pas particullièrement vulnérable
+- Port 1337: Service web qui hebèrege le site web du groupe 
+
+
+
+
