@@ -17,12 +17,12 @@ Comme dans tous défis de test d'intrusion la première étape consiste à faire
 nmap -p- 10.10.10.10 -A
 ```
 
-Nous constatons que 4 ports sont ouverts: `22, 80, 1337, 20221`.
+Nous constatons que 4 ports sont ouverts : `22, 80, 1337, 20221`.
 
-- Port 80: Il ne donne rien de vraiment interessant à part la page par defaut de Appache qui ne nous aidera pas
+- Port 80: Il ne donne rien de vraiment intéressant à part la page par défaut de Apache qui ne nous aidera pas
 - Port 22: Service SSH dont la version n'est pas particulièrement vulnérable
-- Port 20221: Service FTP dont la version n'est pas particullièrement vulnérable
-- Port 1337: Service web qui hebèrege le site web du groupe 
+- Port 20221: Service FTP dont la version n'est pas particulièrement vulnérable
+- Port 1337: Service web qui héberge le site web du groupe
 
 
 
