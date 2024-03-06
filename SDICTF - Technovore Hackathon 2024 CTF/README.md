@@ -24,6 +24,30 @@ Nous constatons que 4 ports sont ouverts : `22, 80, 1337, 20221`.
 - Port 20221: Service FTP dont la version n'est pas particulièrement vulnérable
 - Port 1337: Service web qui héberge le site web du groupe
 
+![Capture d’écran_2024-03-06_17-03-43](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/089629c2-e4a0-4bf7-a83c-51874c867213)
 
+La question étant de trouver le flag web, l'une des première chose à éffectuer avant de faire une recherche manuelle consiste à aspirer le site et à rechercher depuis notre terminale le patterne `SDICTF{` qui constitue le debut du flag.
+
+Pour cela plusieurs options s'offrent à nous:
+- La prémière option est d'utiliser l'outil wget
+```
+wget -r -l5 -k -E "http://10.10.239.204:1337/"
+```
+-r : récursif sur le site
+-l5 : cinq niveaux de récursion au maximum
+-k : convertir les destinations des liens pour une lecture locale
+-E : convertir les types de fichier au format HTML (pour éviter que la lecture de sites en PHP ne foire en lecture sous Firefox).
+
+Cela va asspirer le site dans le dossier `10.10.239.204:1337/`
+
+Nous allons ensuite faire la recherche du patterne `SDICTF{` de façon recurssive dans le dossier téléchargé
+```
+cd 10.10.239.204:1337/
+rgrep -i "SDICTF{" .
+```
+et on obtient ainsi le flag web
+```
+./chat/index.html:              <div class="message"><span class="user">Flag Web:</span> SDICTF{*****************************************}</div>
+```
 
 
