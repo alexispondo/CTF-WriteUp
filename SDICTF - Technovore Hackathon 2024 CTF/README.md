@@ -1,5 +1,6 @@
 # Technovore Hackathon 2024 CTF
-![download](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/ed6c5c5c-0720-4a5e-a07e-e08ec9938f5f)
+
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/7583d144-aa93-401d-901d-85cec5bc50ca)
 
 ## Description
 
@@ -26,7 +27,7 @@ Nous constatons que 4 ports sont ouverts : `22, 80, 1337, 20221`.
 
 ![Capture d’écran_2024-03-06_17-03-43](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/089629c2-e4a0-4bf7-a83c-51874c867213)
 
-La question étant de trouver le flag web, l'une des premières chose à effectuer avant de faire une recherche manuelle consiste à aspirer le site et à rechercher depuis notre terminale le paterne `SDICTF{` qui constitue le début du flag.
+La question étant de trouver le flag web, l'une des premières chose à effectuer avant de faire une recherche manuelle consiste à aspirer le site et à rechercher depuis notre terminale le pattern `SDICTF{` qui constitue le début du flag.
 
 Pour cela plusieurs options s'offrent à nous :
 - La première option est d'utiliser l'outil wget
@@ -40,7 +41,7 @@ wget -r -l5 -k -E "http://10.10.239.204:1337/"
 
 Cela va aspirer le site dans le dossier `10.10.239.204:1337/`
 
-Nous allons ensuite faire la recherche du paterne `SDICTF{` de façon récursive dans le dossier téléchargé
+Nous allons ensuite faire la recherche du pattern `SDICTF{` de façon récursive dans le dossier téléchargé
 ```
 cd 10.10.239.204:1337/
 rgrep -i "SDICTF{" .
