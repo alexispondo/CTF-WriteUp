@@ -29,8 +29,7 @@ Nous constatons que 4 ports sont ouverts : `22, 80, 1337, 20221`.
 
 La question étant de trouver le flag web, l'une des premières chose à effectuer avant de faire une recherche manuelle consiste à aspirer le site et à rechercher depuis notre terminale le pattern `SDICTF{` qui constitue le début du flag.
 
-Pour cela plusieurs options s'offrent à nous :
-- La première option est d'utiliser l'outil wget
+Nous pouvons utiliser l'outil wget pour cela
 ```
 wget -r -l5 -k -E "http://10.10.239.204:1337/"
 ```
