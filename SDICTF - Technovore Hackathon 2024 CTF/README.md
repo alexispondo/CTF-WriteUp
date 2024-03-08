@@ -10,7 +10,7 @@ Votre mission, si vous l'acceptez, est cruciale : infiltrer le système d'inform
 
 Votre première tâche consite à bien analyser le site web de darkatt4ck et trouver le flag web
 
-## #Q1 Trouvez le flag sur l'application WEB
+## 1- Trouvez le flag sur l'application WEB
 
 Comme dans tous défis de test d'intrusion la première étape consiste à faire le `scan` de tous les ports sur le serveur cible.
 
@@ -48,4 +48,42 @@ rgrep -i "SDICTF{" .
 et on obtient ainsi le flag web
 
 ![Capture d’écran_2024-03-06_17-50-14](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/e8ea0553-988b-49f9-ac99-e14465a22925)
+
+## 2- Trouvez le flag sur le serveur FTP
+
+Lorsqu'on regarde bien dans le chat, on remarque qu'une discussion à eu lieu sur la mise en place d'un certain serveur ftp
+
+Parcontre le serveur ftp n'est pas en lui même vulnérable.
+
+Après quelques minutes de récherche sur des piste on remarque un lien presque invisible sur la page d'accuielle du site `DarkAtt4ck test`
+
+Il sagit en effet d'un lien qui ne point vers aucune page, ce qui nous donne une erreur 
+
+Le mode debug étant toujours activé nous permet donc à travères cette érreur de voir les differentes urls disponibles, cela nous permet d'avoir accès à l'url `secret_directory/`
+
+Une fois que nous somme sur l'url nous constatons que nous pouvons lire certains fichiers sur le serveur
+
+Nous pouvons donc tenter de faire une attaque de type `Directory traversal attack` qui pourra nous permettre de lire certains fichier de notre choix sur le serveur.
+
+L'un des fichiers les plus lus dans ce cas est `/etc/passwd`
+
+Nous tentonsde lire `/secret_directory/?doc=/etc/passwd`
+
+Nous remarquons que rien ne se passe, dans le cas ou il pourrais sagir d'un chemin absolu nous pouvon tenter de resoudre le problème avec des retours en arrière `../../`
+
+On reprend donc cette fois ci avec les retours en arrière `/secret_directory/?doc=../../etc/passwd`
+
+
+Cette fois ci nous avons la possibilité de lire les fichiers que nous souhaitons sur le serveur.
+
+On se rappel que sur le chat ils avaient parlés de la création d'un serveur FTP et que la liste des utilisateurs autorisé à accédé à ce serveur est disponible à `/home/k1ller/userftp.txt`
+
+
+
+
+
+
+
+
+
 
