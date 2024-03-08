@@ -81,9 +81,11 @@ On tente donc de lire `/secret_directory/?doc=../../home/k1ller/userftp.txt`
 
 Bingo donc nous avons accès au dossier home de `k1ller`
 
-Après plusieurs minutes de recherche, nous tentons de lire le fichier générique présents par défaut dans le répertoire home d'un utilisateur sous linux, et nous constatons que le fichier .bash_history de k1ller est accessible en lecture et nous donne des informations intéressantes comme le mot de passe de l'utilisateur k1ller sur le serveur ftp.
+Après plusieurs minutes de recherche, nous tentons de lire le fichier générique présents par défaut dans le répertoire home d'un utilisateur sous linux, et nous constatons que le fichier `.bash_history` de k1ller est accessible en lecture et nous donne des informations intéressantes comme le mot de passe de l'utilisateur k1ller sur le serveur ftp.
 
-Nous nous connectons donc au server ftp et nous obtenons le flag
+Nous nous connectons donc au server ftp et nous obtenons le flag FTP
+
+## 3- Trouvez le flag de l'utilisateur k1ller
 
 
 
