@@ -50,36 +50,40 @@ et on obtient ainsi le flag web
 ![Capture d’écran_2024-03-06_17-50-14](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/e8ea0553-988b-49f9-ac99-e14465a22925)
 
 ## 2- Trouvez le flag sur le serveur FTP
+Lorsqu'on regarde bien dans le chat, on remarque qu'une discussion a eu lieu sur la mise en place d'un certain serveur ftp
 
-Lorsqu'on regarde bien dans le chat, on remarque qu'une discussion à eu lieu sur la mise en place d'un certain serveur ftp
+Par contre le serveur ftp n'est pas en lui-même vulnérable.
 
-Parcontre le serveur ftp n'est pas en lui même vulnérable.
+Après quelques minutes de recherche sur des pistes on remarque un lien presque invisible sur la page d'accueille du site `DarkAtt4ck test`
 
-Après quelques minutes de récherche sur des piste on remarque un lien presque invisible sur la page d'accuielle du site `DarkAtt4ck test`
+Il s'agit en effet d'un lien qui ne point vers aucune page, ce qui nous donne une erreur 
 
-Il sagit en effet d'un lien qui ne point vers aucune page, ce qui nous donne une erreur 
-
-Le mode debug étant toujours activé nous permet donc à travères cette érreur de voir les differentes urls disponibles, cela nous permet d'avoir accès à l'url `secret_directory/`
+Le mode debug étant toujours activé nous permet donc à travers cette erreur de voir les différentes urls disponibles, cela nous permet d'avoir accès à l'url `secret_directory/`
 
 Une fois que nous somme sur l'url nous constatons que nous pouvons lire certains fichiers sur le serveur
 
-Nous pouvons donc tenter de faire une attaque de type `Directory traversal attack` qui pourra nous permettre de lire certains fichier de notre choix sur le serveur.
+Nous pouvons donc tenter de faire une attaque de type `Directory traversal attack` qui pourra nous permettre de lire certains fichiers de notre choix sur le serveur.
 
 L'un des fichiers les plus lus dans ce cas est `/etc/passwd`
 
-Nous tentonsde lire `/secret_directory/?doc=/etc/passwd`
+Nous tentons de lire `/secret_directory/?doc=/etc/passwd`
 
-Nous remarquons que rien ne se passe, dans le cas ou il pourrais sagir d'un chemin absolu nous pouvon tenter de resoudre le problème avec des retours en arrière `../../`
+Nous remarquons que rien ne se passe, dans le cas ou il pourrait s'agir d'un chemin absolu, nous pouvons tenter de résoudre le problème avec des retours en arrière `../../`
 
-On reprend donc cette fois ci avec les retours en arrière `/secret_directory/?doc=../../etc/passwd`
-
-
-Cette fois ci nous avons la possibilité de lire les fichiers que nous souhaitons sur le serveur.
-
-On se rappel que sur le chat ils avaient parlés de la création d'un serveur FTP et que la liste des utilisateurs autorisé à accédé à ce serveur est disponible à `/home/k1ller/userftp.txt`
+On reprend donc cette fois-ci avec les retours en arrière `/secret_directory/?doc=../../etc/passwd`
 
 
+Cette fois-ci nous avons la possibilité de lire les fichiers que nous souhaitons sur le serveur.
 
+On se rappel que sur le chat ils avaient parlés de la création d'un serveur FTP et que la liste des utilisateurs autorisés à accédé à ce serveur est disponible à `/home/k1ller/userftp.txt`
+
+On tente donc de lire `/secret_directory/?doc=../../home/k1ller/userftp.txt`
+
+Bingo donc nous avons accès au dossier home de `k1ller`
+
+Après plusieurs minutes de recherche, nous tentons de lire le fichier générique présents par défaut dans le répertoire home d'un utilisateur sous linux, et nous constatons que le fichier .bash_history de k1ller est accessible en lecture et nous donne des informations intéressantes comme le mot de passe de l'utilisateur k1ller sur le serveur ftp.
+
+Nous nous connectons donc au server ftp et nous obtenons le flag
 
 
 
