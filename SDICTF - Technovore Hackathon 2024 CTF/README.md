@@ -87,7 +87,27 @@ Nous nous connectons donc au server ftp et nous obtenons le flag FTP
 
 ## 3- Trouvez le flag de l'utilisateur k1ller
 
+En explorant bien le serveur FTP on constate que qu'il existe un dossier `.jobs` qui contient un script qui semble faire un backups de la liste des utilisateurs ftp
 
+Nous pouvons nous en assurer en consultant le fichier /etc/crontab depuis à travers la vulnérabilité web découverte.
+
+Nous savons maintenant que k1ller exécute le fichier de backup toute les 5 minutes
+
+Nous avons également les permissions de modification et d'exécution sur le fichier
+
+Nous pouvons donc effectuer une attaque de reverse shell pour obtenir le shell k1ller
+
+On télécharge et modifie le fichier de backup en y ajoutant notre payload de reverse shell
+
+On prépare notre terminal à recevoir le reverse shell
+
+On re-upload notre fichier de backup modifier
+
+Et on attend 5 min au plus pour obtenir un shell
+
+On stabilise le shell
+
+Une fois avec le shell k1ller nous pouvons lire le flag
 
 
 
