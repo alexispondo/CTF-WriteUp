@@ -123,7 +123,51 @@ Cela nous permet donc d'obtenir un shell darkgod et de lire le flag
 
 ## 5- Trouvez le flag de l'utilisateur shadowxx
 
-En entrant `id` en tant que 
+En entrant `id` en tant que darkgod on constate qu'on fait partir du groupe `seniors`
+
+En recherchant un peu on remarque les membres du groupe seniors ont accès en lecture au fichier `/etc/shadow` qui contient le hash des mots de passe des utilisateurs
+
+On copie le contenu de ce fichier dans un fichier sur notre machine que nous pourrions par la suite cracker avec `john`
+
+Ce la nous permet d'obtenir le mot de passe de l'utilisateur shadowxx
+
+Nous nous connectons en tant que shadowxx ce qui nous permet de lire le flag
+
+## 6- Trouvez le flag de l'utilisateur alpha01
+
+En menant nos investigations nous remarquons que le binaire `/etc/program/programDarkAtt4ck` à un bit SUID activé ce qui nous permet de l'exécuter avec les droits du propriétaire
+
+En cherchant à comprendre ce que le fichier fait nous remarquons qu'il fait appel à un autre fichier du nom de `/var/script.sh`
+
+Regardons le contenu de ce fichier :
+
+Nous remarquons qu'il n'est pas accessible en écriture par shadowxx (ce nous aurait permis de faire un reverse shell rapide) par contre il fait appel à des commandes `whoami` et `hostname` avec leurs noms relatifs ce qui nous permet d'exploiter la variable d'environnement PATH.
+
+D'abord nous modifions notre variable d'environnement PATH en y ajoutant le dossier `/tmp` au début
+
+```
+PATH=/tmp:$PATH
+```
+
+Nous créons un fichier nommé `/tmp/whoami` avec les autorisations d'exécution en y insérant le code de reverse shell
+
+On prépare la machine à accueillir notre reverse shell
+
+Et on re-exécute le binaire `/etc/program/programDarkAtt4ck`
+
+On obtient ainsi un nouveau shell avec notre `uid` qui a changé en devenant celui de `alpha01` ce qui nous permet de lire le flag
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
