@@ -157,6 +157,61 @@ Et on re-exécute le binaire `/etc/program/programDarkAtt4ck`
 
 On obtient ainsi un nouveau shell avec notre `uid` qui a changé en devenant celui de `alpha01` ce qui nous permet de lire le flag
 
+## 7- Trouvez le flag de l'utilisateur root
+
+Le chemin par lequel il fallait passer est de monitorer les processus linux, cela passe par l'outil pspy qui nous permet de le faire sans les permissions root.
+
+Nous téléchargeons et exécutons le fichier pspy sur le serveur cible 
+
+
+Après quelques minutes nous remarquons qu'il y a une tache cron qui exécute avec les autorisations root un ensemble de commande qui permet d'archiver les fichiers contenu dans `/var/documentations` dans le dossier `/var/backups`
+
+Ce qui nous intéresse ici, c'est la manière dont le dossier est archivé, en effet il archive tous les fichiers de documentations en utilisant la commande `tar` et le wildcard `*`
+
+Nous pouvons exploiter cela en utilisant le `Tar Wildcard Injection`
+
+L'une des choses qui pourra nous permettre de faire cette exploitation est d'avoir accès en écriture au dossier dans lequel l'archive sera créé, qui est ici `/var/documentations`. Lorsqu'on regarde les permissions de ce dossier, nous pouvons remarquer que seules l'utilisateur `root` et le groupe `managers` ont les droits d'écriture sur le dossier.
+
+
+En entre une fois de plus la commande `id` pour obtenir les groupe auxquels nous avons accès
+
+Nous constatons que nous somme toujours shadow et que seul notre uid avait changé 
+
+Nous vérifions l'id de alpha01
+
+On constate qu'il fait bien partir du groupe `managers`, nous devons donc trouver le moyen de devenir réellement `alpha01`, et non seulement en termes du `uid`
+
+Un moyen de le devenir est de créer une paire de clé SSH en tant que alpha01 et de se connecter avec la clé privée 
+
+Voici le processus :
+
+1- Créer la paire de clé
+
+2- Transférer la clé privée sur notre machine et lui donner les bonnes permissions
+
+3- Transférer la clé publique dans le fichier `authorized_key` en lui donnant la bonne permission
+
+Ensuite on se connecte par ssh et on vérifie l'id de nouveau
+
+Nous faisons maintenant bien partir du groupe `managers`, nous pouvons donc modifier le dossier `/var/documetations`
+
+Le processus d'exploitation se fait comme suit :
+
+1- Créer un script de reverse shell (ex: script.sh), lui donner les droits d'exécution et préparer notre machine à le recevoir
+
+2- Créer un fichier vide nommé `--checkpoint=1`
+```
+echo ""  --checkpoint=1
+```
+3- Créer un fichier vide nommé `"--checkpoint-action=exec=sh script.sh"`
+```
+echo ""  "--checkpoint-action=exec=sh script.sh"
+```
+
+Ensuite on attend une minute que notre script soit exécuté
+
+On obtient ainsi un shell root ce qui nous permet de lire le flag
+
 
 
 
