@@ -157,6 +157,8 @@ On stabilise le shell
 
 Une fois avec le shell k1ller nous pouvons lire le flag
 
+<img width="360" alt="i22" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/c46a2be9-a384-4107-86d3-626c704de1f4">
+
 ## 4- Trouvez le flag de l'utilisateur darkgod
 
 Une fois k1ller nous pouvons vérifier nos autorisations sudo `sudo -l`
