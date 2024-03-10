@@ -42,6 +42,8 @@ wget -r -l5 -k -E "http://10.10.201.34:1337/"
 - k : convertir les destinations des liens pour une lecture locale
 - E : convertir les types de fichier au format HTML (pour éviter que la lecture de sites en PHP ne foire en lecture sous Firefox).
 
+<img width="531" alt="i1" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/4be72295-5cca-4d1d-be1f-da680c608253">
+
 Cela va aspirer le site dans le dossier `10.10.201.34:1337/`
 
 Nous allons ensuite faire la recherche du pattern `SDICTF{` de façon récursive dans le dossier téléchargé
@@ -51,20 +53,31 @@ rgrep -i "SDICTF{" .
 ```
 et on obtient ainsi le flag web
 
-![Capture d’écran_2024-03-06_17-50-14](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/e8ea0553-988b-49f9-ac99-e14465a22925)
+<img width="545" alt="i2" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/41668337-7460-4af3-a867-9429462a4d5b">
 
 Le flag peut être également vu sur le site web dans le chat
+
+<img width="531" alt="i3" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/c84580fd-d491-4a43-b98c-69c85c6ce3bf">
+
 
 ## 2- Trouvez le flag sur le serveur FTP
 Lorsqu'on regarde bien dans le chat, on remarque qu'une discussion a eu lieu sur la mise en place d'un certain serveur ftp
 
+<img width="548" alt="i4" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/e9bac6a5-0e88-4763-ab29-30f1360f74b2">
+
 Par contre le serveur ftp n'est pas en lui-même vulnérable.
+
+<img width="259" alt="i5" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/c2c2f3bb-fdcc-431e-b4f8-7729dcbf9a98">
 
 Après quelques minutes de recherche sur des pistes on remarque un lien presque invisible sur la page d'accueille du site `DarkAtt4ck test`
 
-Il s'agit en effet d'un lien qui ne point vers aucune page, ce qui nous donne une erreur 
+<img width="526" alt="i6" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/3e612359-8376-457e-b4b6-7466d2f76f3e">
+
+Il s'agit en effet d'un lien qui ne point vers aucune page existante, ce qui nous donne une erreur 
 
 Le mode debug étant toujours activé nous permet donc à travers cette erreur de voir les différentes urls disponibles, cela nous permet d'avoir accès à l'url `secret_directory/`
+
+<img width="562" alt="i7" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/871a868b-874a-4b1e-8f4e-62b9536cea53">
 
 Une fois que nous somme sur l'url nous constatons que nous pouvons lire certains fichiers sur le serveur
 
@@ -90,10 +103,11 @@ Cette fois-ci nous avons la possibilité de lire les fichiers que nous souhaiton
 
 On se rappel que sur le chat ils avaient parlés de la création d'un serveur FTP et que la liste des utilisateurs autorisés à accédé à ce serveur est disponible à `/home/k1ller/userftp.txt`
 
+<img width="548" alt="i4" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/aef3875b-1e67-4cfd-9db8-6ea65da95a36">
+
 On tente donc de lire `/secret_directory/?doc=../../home/k1ller/userftp.txt`
 
 ![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/f27628d5-b351-49a1-aca6-68c6e3091b14)
-
 
 Bingo donc nous avons accès au dossier home de `k1ller`
 
