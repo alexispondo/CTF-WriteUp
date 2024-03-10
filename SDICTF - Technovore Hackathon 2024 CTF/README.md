@@ -109,7 +109,11 @@ Nous nous connectons donc au server ftp et nous obtenons le flag FTP
 
 En explorant bien le serveur FTP on constate que qu'il existe un dossier `.jobs` qui contient un script qui semble faire un backups de la liste des utilisateurs ftp
 
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/aaf0fecd-762d-4fb6-abe7-7470d88aace2)
+
 Nous pouvons nous en assurer en consultant le fichier /etc/crontab depuis à travers la vulnérabilité web découverte.
+
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/45e1130a-5873-404a-bee2-0842018cfef1)
 
 Nous savons maintenant que k1ller exécute le fichier de backup toute les 5 minutes
 
@@ -119,13 +123,23 @@ Nous pouvons donc effectuer une attaque de reverse shell pour obtenir le shell k
 
 On télécharge et modifie le fichier de backup en y ajoutant notre payload de reverse shell
 
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/b7b81d00-1769-4f6b-aa4f-b6dad5be1be4)
+
 On prépare notre terminal à recevoir le reverse shell
 
-On re-upload notre fichier de backup modifier
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/9eddd21f-a9bf-4c1d-a5d3-2d5163993a29)
+
+On re-upload notre fichier de backup modifié
+
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/7d4e5b6e-e26d-490a-8f2d-b4e34cee9c52)
 
 Et on attend 5 min au plus pour obtenir un shell
 
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/3ec3d1ba-ce69-4136-96ee-6f7efe5f6286)
+
 On stabilise le shell
+
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/7cd2c970-8640-4693-a0ea-00dd6134f562)
 
 Une fois avec le shell k1ller nous pouvons lire le flag
 
