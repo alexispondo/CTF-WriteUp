@@ -67,6 +67,7 @@ Il s'agit en effet d'un lien qui ne point vers aucune page, ce qui nous donne un
 Le mode debug étant toujours activé nous permet donc à travers cette erreur de voir les différentes urls disponibles, cela nous permet d'avoir accès à l'url `secret_directory/`
 
 Une fois que nous somme sur l'url nous constatons que nous pouvons lire certains fichiers sur le serveur
+
 ![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/bfede17e-78fa-4a66-9a3b-6c64d39b7fc0)
 
 Nous pouvons donc tenter de faire une attaque de type `Directory traversal attack` qui pourra nous permettre de lire certains fichiers de notre choix sur le serveur.
@@ -75,9 +76,14 @@ L'un des fichiers les plus lus dans ce cas est `/etc/passwd`
 
 Nous tentons de lire `/secret_directory/?doc=/etc/passwd`
 
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/98f61e6a-2558-4f48-ae1d-fdcc953d9512)
+
+
 Nous remarquons que rien ne se passe, dans le cas ou il pourrait s'agir d'un chemin absolu, nous pouvons tenter de résoudre le problème avec des retours en arrière `../../`
 
 On reprend donc cette fois-ci avec les retours en arrière `/secret_directory/?doc=../../etc/passwd`
+
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/23fdb133-4b51-4967-a9b3-ff29c50bcde1)
 
 
 Cette fois-ci nous avons la possibilité de lire les fichiers que nous souhaitons sur le serveur.
@@ -86,9 +92,14 @@ On se rappel que sur le chat ils avaient parlés de la création d'un serveur FT
 
 On tente donc de lire `/secret_directory/?doc=../../home/k1ller/userftp.txt`
 
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/f27628d5-b351-49a1-aca6-68c6e3091b14)
+
+
 Bingo donc nous avons accès au dossier home de `k1ller`
 
 Après plusieurs minutes de recherche, nous tentons de lire le fichier générique présents par défaut dans le répertoire home d'un utilisateur sous linux, et nous constatons que le fichier `.bash_history` de k1ller est accessible en lecture et nous donne des informations intéressantes comme le mot de passe de l'utilisateur k1ller sur le serveur ftp.
+
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/96cc60ce-7748-4fbd-8f01-63dd556f4ba0)
 
 Nous nous connectons donc au server ftp et nous obtenons le flag FTP
 
