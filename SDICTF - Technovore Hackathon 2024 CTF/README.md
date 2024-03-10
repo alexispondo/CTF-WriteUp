@@ -149,9 +149,12 @@ Une fois k1ller nous pouvons vérifier nos autorisations sudo `sudo -l`
 
 Nous pouvons constater que k1ller a la possibilité d'exécuter le binaire view en tant que darkgod.
 Or GTFBins nous dit qu'il est possible d'obtenir un shell en exploitant la commande view
+
 ![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/3a82c570-9a2d-4539-91df-2f30eb231fa8)
 
-On exécuté ainsi `sudo -u darkgod view -c ':!/bin/sh'`
+On exécuté ainsi `sudo -u darkgod view -c ':!/bin/bash'`
+
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/c50d901e-77e7-4d5a-9b0c-538bee78ac8c)
 
 Cela nous permet donc d'obtenir un shell darkgod et de lire le flag
 
