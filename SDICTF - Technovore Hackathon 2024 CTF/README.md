@@ -103,6 +103,8 @@ Après plusieurs minutes de recherche, nous tentons de lire le fichier génériq
 
 Nous nous connectons donc au server ftp et nous obtenons le flag FTP
 
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/ed46e5c8-8c91-4e56-91a3-70445383233a)
+
 ## 3- Trouvez le flag de l'utilisateur k1ller
 
 En explorant bien le serveur FTP on constate que qu'il existe un dossier `.jobs` qui contient un script qui semble faire un backups de la liste des utilisateurs ftp
