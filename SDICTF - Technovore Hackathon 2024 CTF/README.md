@@ -10,12 +10,16 @@ Votre mission, si vous l'acceptez, est cruciale : infiltrer le système d'inform
 
 Votre première tâche consite à bien analyser le site web de darkatt4ck et trouver le flag web
 
+## Infos:
+- IP attaquant: 10.10.83.51
+- IP cible: 10.10.201.34
+
 ## 1- Trouvez le flag sur l'application WEB
 
 Comme dans tous défis de test d'intrusion la première étape consiste à faire le `scan` de tous les ports sur le serveur cible.
 
 ```
-nmap -p- 10.10.10.10 -A
+nmap -p- 10.10.201.34 -A
 ```
 
 Nous constatons que 4 ports sont ouverts : `22, 80, 1337, 20221`.
@@ -31,23 +35,25 @@ La question étant de trouver le flag web, l'une des premières chose à effectu
 
 Nous pouvons utiliser l'outil wget pour cela
 ```
-wget -r -l5 -k -E "http://10.10.239.204:1337/"
+wget -r -l5 -k -E "http://10.10.201.34:1337/"
 ```
 - r : récursif sur le site
 - l5 : cinq niveaux de récursion au maximum
 - k : convertir les destinations des liens pour une lecture locale
 - E : convertir les types de fichier au format HTML (pour éviter que la lecture de sites en PHP ne foire en lecture sous Firefox).
 
-Cela va aspirer le site dans le dossier `10.10.239.204:1337/`
+Cela va aspirer le site dans le dossier `10.10.201.34:1337/`
 
 Nous allons ensuite faire la recherche du pattern `SDICTF{` de façon récursive dans le dossier téléchargé
 ```
-cd 10.10.239.204:1337/
+cd 10.10.201.34:1337/
 rgrep -i "SDICTF{" .
 ```
 et on obtient ainsi le flag web
 
 ![Capture d’écran_2024-03-06_17-50-14](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/e8ea0553-988b-49f9-ac99-e14465a22925)
+
+Le flag peut être également vu sur le site web dans le chat
 
 ## 2- Trouvez le flag sur le serveur FTP
 Lorsqu'on regarde bien dans le chat, on remarque qu'une discussion a eu lieu sur la mise en place d'un certain serveur ftp
@@ -61,6 +67,7 @@ Il s'agit en effet d'un lien qui ne point vers aucune page, ce qui nous donne un
 Le mode debug étant toujours activé nous permet donc à travers cette erreur de voir les différentes urls disponibles, cela nous permet d'avoir accès à l'url `secret_directory/`
 
 Une fois que nous somme sur l'url nous constatons que nous pouvons lire certains fichiers sur le serveur
+![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/bfede17e-78fa-4a66-9a3b-6c64d39b7fc0)
 
 Nous pouvons donc tenter de faire une attaque de type `Directory traversal attack` qui pourra nous permettre de lire certains fichiers de notre choix sur le serveur.
 
