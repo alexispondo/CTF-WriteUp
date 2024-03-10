@@ -117,7 +117,7 @@ Après plusieurs minutes de recherche, nous tentons de lire le fichier génériq
 
 Nous nous connectons donc au server ftp et nous obtenons le flag FTP
 
-![image](https://github.com/alexispondo/CTF-WriteUp/assets/47490330/ed46e5c8-8c91-4e56-91a3-70445383233a)
+<img width="474" alt="i14" src="https://github.com/alexispondo/CTF-WriteUp/assets/47490330/c48fffe0-2679-4363-9f72-39ef8806434f">
 
 ## 3- Trouvez le flag de l'utilisateur k1ller
 
